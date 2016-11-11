@@ -1,4 +1,4 @@
-// #1  ################### 
+// #1  ###################
 // # Scope
 // Given the following function
 // ```
@@ -26,19 +26,19 @@
 // Remove entries from the array until only correct answers remain
 
 // Which function(s) access the playball variable and get homerun (Delete wrong answers, leave correct ones)
-var scopeArray1 = ["grandpa", "dad", "son", "uncle", "cousin"];
+var scopeArray1 = ["grandpa", "uncle", "cousin"];
 
 // Which function(s) access the playball variable and get touchdown (Delete wrong answers, leave correct ones)
-var scopeArray2 = ["grandpa", "dad", "son", "uncle", "cousin"];
+var scopeArray2 = ["dad", "son"];
 
 // Which function(s) access the badjoke variable and get undefined (Delete wrong answers, leave correct ones)
-var scopeArray3 = ["grandpa", "dad", "son", "uncle", "cousin"];
+var scopeArray3 = ["grandpa", "dad", "son"];
 
 // Which functions accesss the badjoke variable and get "Har" (Delete wrong answers, leave correct ones)
-var scopeArray4 = ["grandpa", "dad", "son", "uncle", "cousin"];
+var scopeArray4 = ["uncle", "cousin"];
 
 // Which functions access the playnintendo variable and get Mario (Delete wrong answers, leave correct ones)
-var scopeArray5 = ["grandpa", "dad", "son", "uncle", "cousin"];
+var scopeArray5 = ["son"];
 
 
 // #2  ###################
@@ -50,6 +50,12 @@ var foo;
   which changes the variable foo (above) to 'bar'
   And resolve the promise when setTimeout completes.
 */
+let async = () => {
+	var deferred = $q.defer();
+	deferred.resolve(setTimeout(() => {}, 1000));
+	return deferred.promise;
+}
+async().then(()=>{foo = "bar";});
 
 
 // #3  ###################
@@ -57,7 +63,9 @@ var foo;
 // Write a function called context1 that takes in 4 parameters: A function called myFn, an object called context, param1, and param2.
 // Invoke myFn explicitly setting the context to the object called context.  Pass in param1 and param2 in order as well.
 
-
+let context1 = (myFn, context, param1, param2) => {
+	return myFn.apply(context, [param1, param2]);
+}
 
 
 // #4  ###################
@@ -65,7 +73,9 @@ var foo;
 // Write a function called context2 that takes in 3 parameters: A function called myFn, an object called context, and an array called params
 // Invoke myFn explicitly setting the context to the object called context.  Pass in params
 
-
+let context2 = (myFn, context, params) => {
+		return myFn.apply(context, params)
+}
 
 
 // #5  ###################
@@ -73,35 +83,59 @@ var foo;
 // Write a function called context3 that takes in 2 parameters: A function called myFn, and an object called context
 // Make sure the function is permanently linked to the context.  This should give you a new function, return it.
 
-
+let context3 = (myFn, context) => {
+	return myFn.bind(context);
+}
 
 
 // #6  ###################
 // # Constructor Function
 // Make a constructor function called taco that takes in 3 parameters: shell, meat, veggies and assigns them to identically named properties.
 
-
+function Taco (shell, meat, veggies) {
+		this.shell = shell
+		this.meat = meat
+		this.veggies = veggies
+}
 
 
 // #7  ###################
 // # Implicit binding
 // Make a constructor function called burrito.  It has a property called percentLeft = 100.  It has a property called eat that is a function.  When eat is invoked it uses context to implicitly subract 25 from the percentLeft on the burrito.
 
-
+function Burrito (  ) {
+	var percentLeft = 100
+	this.eat = function() {
+		percentLeft -= 25;
+		return percentLeft;
+	}
+}
 
 // #8  ###################
 // # Prototype 1
 // Add prototype function to the array type that doubles the value of every item in the array
 
-
+Array.prototype.doubler = function() {
+	for (var i = 0; i < this.length; i++) {
+		this[i] = this[i] *  2
+	}
+	return this
+}
 
 
 // #9  ###################
 // # Prototype 2
-// Write a constructor function called chimichanga.  It has a property called percentLeft = 100.  It has a prototype function called eat.  When eat is invoked it uses context to implicitly subract 20 from the precentLeft on the chimichanga.
+// Write a constructor function called Chimichanga.  It has a property called percentLeft = 100.  It has a prototype function called eat.  When eat is invoked it uses context to implicitly subract 20 from the precentLeft on the chimichanga.
 
-
-
+function Chimichanga() {
+	percentLeft = 100;
+	// this.eat = function(){
+	// 	percentLeft = percentLeft-100
+	// }
+}
+Chimichanga.prototype.eat = function() {
+	this.percentLeft = percentLeft - 20;
+}
 
 // #10  ###################
 // # Closure 1
