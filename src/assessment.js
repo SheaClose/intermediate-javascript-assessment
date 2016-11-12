@@ -104,11 +104,11 @@ function Taco (shell, meat, veggies) {
 // Make a constructor function called burrito.  It has a property called percentLeft = 100.  It has a property called eat that is a function.  When eat is invoked it uses context to implicitly subract 25 from the percentLeft on the burrito.
 
 function Burrito (  ) {
-	var percentLeft = 100
+	this.percentLeft = 100;
 	this.eat = function() {
-		percentLeft -= 25;
-		return percentLeft;
+		this.percentLeft -= 25;
 	}
+	return this;
 }
 
 // #8  ###################
@@ -128,21 +128,23 @@ Array.prototype.doubler = function() {
 // Write a constructor function called Chimichanga.  It has a property called percentLeft = 100.  It has a prototype function called eat.  When eat is invoked it uses context to implicitly subract 20 from the precentLeft on the chimichanga.
 
 function Chimichanga() {
-	percentLeft = 100;
-	this.prototype.eat = function(){
-		percentLeft = percentLeft-100
-	}
+	this.percentLeft = 100;
+	return this;
 }
-// Chimichanga.prototype.eat = function() {
-// 	percentLeft = percentLeft - 20;
-// }
+Chimichanga.prototype.eat = function(){
+	return this.percentLeft -= 20;
+}
 
 // #10  ###################
 // # Closure 1
 // Write a function called sentence machine.  It takes in a parameter called partOne.  It returns a function called sentenceSmasher.
 // When sentenceSmasher is invoked it should take in a parameter called partTwo and return a new string that adds partOne and partTwo together.
 
-
+const sentenceMachine = (partOne) => {
+	return function(partTwo){
+		return partOne + partTwo;
+	}
+}
 
 // #11  ###################
 // # Closure 2
@@ -157,7 +159,19 @@ function Chimichanga() {
 // }
 // ```
 
-
+const subway = (personName) => {
+	this.orderPerson = personName;
+	this.addIngredient = function(ingredient) {
+		let ingredients = [];
+		ingredients.push(ingredient)
+		let order = {
+			orderPerson: personName
+			, ingredients: ingredients
+		}
+		return order;
+	}
+	return this.addIngredient;
+}
 
 // #12  ###################
 // # Type checking
@@ -165,3 +179,16 @@ function Chimichanga() {
 // If both parameters are the same type an the same value return "Exact match".
 // If both parameters have the same value but are different types return "Different types"
 // Otherwise return "Different values"
+
+const compareValues = (para1, para2) => {
+		if (typeof para1 === typeof para2) {
+			if (para1 === para2) {
+				return "Exact match"
+			}
+			return "Different values"
+		}
+		if (para1 == para2) {
+			return "Different types"
+		}
+		return "Different values"
+}

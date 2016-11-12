@@ -70,7 +70,6 @@ describe('context2', function() {
 
   it('should correctly assign context', function() {
     var nums = [getNum(), getNum(), getNum()]
-    console.log(nums);
     var num = getNum();
     var obj = {number: num};
 
