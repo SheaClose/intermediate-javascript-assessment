@@ -129,13 +129,13 @@ Array.prototype.doubler = function() {
 
 function Chimichanga() {
 	percentLeft = 100;
-	// this.eat = function(){
-	// 	percentLeft = percentLeft-100
-	// }
+	this.prototype.eat = function(){
+		percentLeft = percentLeft-100
+	}
 }
-Chimichanga.prototype.eat = function() {
-	this.percentLeft = percentLeft - 20;
-}
+// Chimichanga.prototype.eat = function() {
+// 	percentLeft = percentLeft - 20;
+// }
 
 // #10  ###################
 // # Closure 1
